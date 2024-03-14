@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Picker</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function ColorPicker() {
+      const [color, setColor] = React.useState('');
+      const [validColor, setValidColor] = React.useState(true);
+
+      const handleChange = (event) => {
+        const value = event.target.value;
+        setValidColor(/^#[0-9A-F]{6}$/i.test(value));
+        setColor(value);
+      };
+
+      return (
+        <div>
+          <input
+            type="text"
+            value={color}
+            onChange={handleChange}
+            style={{ marginBottom: '10px' }}
+          />
+          <div
+            style={{
+              width: '100px',
+              height: '100px',
+              backgroundColor: validColor ? color : 'transparent',
+              marginTop: '10px',
+              border: '1px solid #ccc',
+            }}
+          ></div>
+          {!validColor && <p style={{ color: 'red', marginTop: '5px' }}>Invalid color value!</p>}
+        </div>
+      );
+    }
+
+    ReactDOM.render(<ColorPicker />, document.getElementById('root'));
+  </script>
+</body>
+</html>
