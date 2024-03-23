@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greeting Card Display</title>
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .greeting-card {
+      width: 700px;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+
+    .greeting-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .greeting-card h2 {
+      margin-top: 0;
+      color: #333333;
+    }
+
+    .greeting-card p {
+      margin: 10px 0;
+      color: #666666;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container" id="root"></div>
+  
+  <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const GreetingCard = ({ greeting, name }) => {
+      return (
+        <div className="greeting-card">
+          <h2>{greeting}</h2>
+          <p>Dear {name},</p>
+          <p>Wishing you all the best!</p>
+        </div>
+      );
+    };
+
+    const App = () => {
+      const greetingCards = [
+        { greeting: 'Happy Birthday', name: 'John Doe' },
+        { greeting: 'Congratulations', name: 'Jane Smith' },
+        { greeting: 'Merry Christmas', name: 'Alice Johnson' }
+      ];
+
+      return (
+        <div>
+          {greetingCards.map((card, index) => (
+            <GreetingCard key={index} greeting={card.greeting} name={card.name} />
+          ))}
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  
+  </script>
+
+</body>
+
+</html>
